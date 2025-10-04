@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>femboystar</title>
+  <meta name="theme-color" content="#FF4BA5">
+  <link rel="icon" href="bunny.png" />
+  <style>
+    :root{
+      --pink:#FF4BA5;
+      --pillBg:rgba(255,255,255,.82);
+      --pillText:#FF4BA5;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0}
+    body{
+      background: var(--pink) center/cover no-repeat fixed;
+      color:#111;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+    }
+    /* full-screen hero */
+    .hero{
+      position:relative;
+      min-height:100dvh;
+      display:grid;
+      place-items:end center;
+      overflow:hidden;
+      isolation:isolate;
+    }
+    .hero::before{
+      content:"";
+      position:absolute; inset:0;
+      background: url("hero.jpg") center/cover no-repeat;
+      z-index:-2;
+    }
+    /* jemný přechod pro čitelnost tlačítek na spodku */
+    .hero::after{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(to top, rgba(0,0,0,.22), rgba(0,0,0,0) 35%);
+      z-index:-1;
+    }
+
+    /* logo králíček vlevo nahoře */
+    .logo{
+      position:fixed; top:14px; left:14px;
+      width:80px; height:80px;
+      display:block;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,.25));
+      user-select:none;
+    }
+
+    /* dolní linky */
+    .links{
+      width:100%;
+      max-width:560px;
+      padding:24px 18px 34px;
+      display:flex; flex-direction:column; gap:14px;
+    }
+    .pill{
+      display:block;
+      text-align:center;
+      padding:16px 22px;
+      border-radius:999px;
+      background:var(--pillBg);
+      color:var(--pillText);
+      text-decoration:none;
+      font-weight:700;
+      letter-spacing:.2px;
+      backdrop-filter:saturate(120%) blur(2px);
+      -webkit-tap-highlight-color: transparent;
+      transition: transform .12s ease, opacity .12s ease;
+    }
+    .pill:active{ transform: scale(.98); opacity:.9 }
+    /* desktop drobnost – zachová 9:16 pocit */
+    @media (min-aspect-ratio: 10/9){
+      .hero{ place-items:end center; }
+    }
+    /* přístupnost */
+    .sr{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px)}
+  </style>
+</head>
+<body>
+  <img src="bunny.png" alt="femboystar" class="logo" width="80" height="80" />
+
+  <main class="hero" role="main" aria-label="Peris Vixen">
+    <nav class="links" aria-label="primary">
+      <a class="pill" href="https://onlyfans.com/perisvixen" rel="noopener">OnlyFans</a>
+      <a class="pill" href="https://www.instagram.com/perisvixen" rel="noopener">Instagram</a>
+      <a class="pill" href="https://x.com/perisvixen" rel="noopener">X</a>
+    </nav>
+  </main>
+</body>
+</html>
