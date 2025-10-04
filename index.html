@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>femboystar</title>
   <meta name="theme-color" content="#FF4BA5" />
-  <link rel="icon" href="bunny.png" />
+  <link rel="icon" href="assets/IMG_5512.webp" />
 
   <!-- STYLES -->
   <style>
@@ -21,6 +21,7 @@
       color:#111;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
     }
+
     .hero{
       position:relative;
       min-height:100dvh;
@@ -30,11 +31,11 @@
       isolation:isolate;
     }
     .hero::before{
-  content:"";
-  position:absolute; inset:0;
-  background: url("assets/IMG_5473.jpeg") center/cover no-repeat;
-  z-index:-2;
-}
+      content:"";
+      position:absolute; inset:0;
+      background: url("assets/IMG_5473.jpeg") center/cover no-repeat;
+      z-index:-2;
+    }
     .hero::after{
       content:"";
       position:absolute; inset:0;
@@ -49,7 +50,8 @@
       display:block;
       user-select:none;
       -webkit-user-drag:none;
-      image-rendering: pixelated; /* ať je pixel art ostrý */
+      image-rendering: pixelated; /* ostrý pixel-art */
+      z-index:50; /* jistota, že je nad fotkou i gradientem */
     }
 
     .links{
@@ -73,9 +75,11 @@
       transition: transform .12s ease, opacity .12s ease;
     }
     .pill:active{ transform: scale(.98); opacity:.9 }
+
     @media (min-aspect-ratio: 10/9){
       .hero{ place-items:end center; }
     }
+
     .sr{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px)}
   </style>
 
@@ -91,7 +95,7 @@
 
 <body>
   <!-- logo -->
-  <img src="IMG_5512.webp" alt="femboystar" class="logo" width="70" height="70" />
+  <img src="assets/IMG_5512.webp" alt="femboystar" class="logo" width="70" height="70" />
 
   <main class="hero" role="main" aria-label="Peris Vixen">
     <nav class="links" aria-label="primary">
