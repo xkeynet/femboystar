@@ -5,17 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>femboystar</title>
   <meta name="theme-color" content="#FF4BA5" />
-  <link rel="icon" href="assets/IMG_5512.webp" />
+
+  <!-- FAVICON -->
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
+  <link rel="apple-touch-icon" href="assets/favicon-32.png" />
 
   <!-- STYLES -->
   <style>
     :root{
-      --pink:#FF4BA5;
-      --pillBg:rgba(255,255,255,.82);
-      --pillText:#FF4BA5;
+      --pink: #FF4BA5;
+      --glassPink1: rgba(255, 75, 165, .55);
+      --glassPink2: rgba(255, 75, 165, .45);
     }
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0}
+
+    *{ box-sizing:border-box }
+    html,body{ height:100%; margin:0 }
     body{
       background: var(--pink) center/cover no-repeat fixed;
       color:#111;
@@ -30,17 +34,21 @@
       overflow:hidden;
       isolation:isolate;
     }
+
     .hero::before{
       content:"";
       position:absolute; inset:0;
       background: url("assets/IMG_5473.jpeg") center/cover no-repeat;
       z-index:-2;
     }
+
+    /* žádné ztmavení – pseudo-element ponecháme prázdný kvůli vrstvení */
     .hero::after{
       content:"";
       position:absolute; inset:0;
-      background: linear-gradient(to top, rgba(0,0,0,.22), rgba(0,0,0,0) 35%);
+      background:none;
       z-index:-1;
+      pointer-events:none;
     }
 
     /* čistý pixelový králíček vlevo nahoře */
@@ -50,37 +58,69 @@
       display:block;
       user-select:none;
       -webkit-user-drag:none;
-      image-rendering: pixelated; /* ostrý pixel-art */
-      z-index:50; /* jistota, že je nad fotkou i gradientem */
+      image-rendering: pixelated;
+      z-index:50;
     }
 
     .links{
       width:100%;
       max-width:560px;
       padding:24px 18px 34px;
-      display:flex; flex-direction:column; gap:14px;
+      display:flex;
+      flex-direction:column;
+      gap:16px;
     }
+
+    /* LIQUID-GLASS růžové pilulky */
     .pill{
       display:block;
       text-align:center;
-      padding:16px 22px;
+      padding:18px 24px;
       border-radius:999px;
-      background:var(--pillBg);
-      color:var(--pillText);
       text-decoration:none;
-      font-weight:700;
+      font-weight:800;
       letter-spacing:.2px;
-      backdrop-filter:saturate(120%) blur(2px);
+
+      /* růžové sklo – vrstvené pozadí */
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.35), rgba(255,255,255,.15)),
+        linear-gradient(180deg, var(--glassPink1), var(--glassPink2));
+      color:#fff;
+      text-shadow: 0 1px 0 rgba(0,0,0,.15);
+
+      border:1px solid rgba(255,75,165,.55);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.5),
+        inset 0 -10px 24px rgba(255,75,165,.35),
+        0 14px 34px rgba(255,75,165,.35);
+
+      backdrop-filter: blur(8px) saturate(140%);
+      -webkit-backdrop-filter: blur(8px) saturate(140%);
+
       -webkit-tap-highlight-color: transparent;
-      transition: transform .12s ease, opacity .12s ease;
+      transition: transform .12s ease, opacity .12s ease, box-shadow .12s ease;
     }
-    .pill:active{ transform: scale(.98); opacity:.9 }
+
+    .pill:active{
+      transform: scale(.98);
+      opacity:.95;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.45),
+        inset 0 -6px 18px rgba(255,75,165,.35),
+        0 10px 26px rgba(255,75,165,.30);
+    }
 
     @media (min-aspect-ratio: 10/9){
       .hero{ place-items:end center; }
     }
 
-    .sr{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px)}
+    /* přístupnost */
+    .sr{
+      position:absolute!important;
+      height:1px; width:1px;
+      overflow:hidden;
+      clip:rect(1px,1px,1px,1px);
+    }
   </style>
 
   <!-- GOOGLE ANALYTICS -->
