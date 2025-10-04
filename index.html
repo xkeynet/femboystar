@@ -1,11 +1,13 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>femboystar</title>
-  <meta name="theme-color" content="#FF4BA5">
+  <meta name="theme-color" content="#FF4BA5" />
   <link rel="icon" href="bunny.png" />
+
+  <!-- STYLES -->
   <style>
     :root{
       --pink:#FF4BA5;
@@ -19,7 +21,6 @@
       color:#111;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
     }
-    /* full-screen hero */
     .hero{
       position:relative;
       min-height:100dvh;
@@ -34,15 +35,12 @@
       background: url("hero.jpg") center/cover no-repeat;
       z-index:-2;
     }
-    /* jemný přechod pro čitelnost tlačítek na spodku */
     .hero::after{
       content:"";
       position:absolute; inset:0;
       background: linear-gradient(to top, rgba(0,0,0,.22), rgba(0,0,0,0) 35%);
       z-index:-1;
     }
-
-    /* logo králíček vlevo nahoře */
     .logo{
       position:fixed; top:14px; left:14px;
       width:80px; height:80px;
@@ -50,8 +48,6 @@
       filter: drop-shadow(0 2px 6px rgba(0,0,0,.25));
       user-select:none;
     }
-
-    /* dolní linky */
     .links{
       width:100%;
       max-width:560px;
@@ -73,14 +69,22 @@
       transition: transform .12s ease, opacity .12s ease;
     }
     .pill:active{ transform: scale(.98); opacity:.9 }
-    /* desktop drobnost – zachová 9:16 pocit */
     @media (min-aspect-ratio: 10/9){
       .hero{ place-items:end center; }
     }
-    /* přístupnost */
     .sr{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px)}
   </style>
+
+  <!-- GOOGLE ANALYTICS -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-WH62CVXEQ4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-WH62CVXEQ4');
+  </script>
 </head>
+
 <body>
   <img src="bunny.png" alt="femboystar" class="logo" width="80" height="80" />
 
