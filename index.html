@@ -12,48 +12,37 @@
 
   <style>
     :root{
-      --brand:#FF4BA5;                 /* tvoje růžová */
-      --pill-bg: rgba(255, 75, 165, .72); /* průhlednost pilulek */
-      --pill-gloss: rgba(255,255,255,.25);
-      --txt:#000;
+      --brand:#FF4BA5;
+      --pillTop:  rgba(255,75,165,.62);
+      --pillBot:  rgba(255,75,165,.44);
+      --pillEdge: rgba(255,255,255,.22);
+      --text: #0c0c0c;
     }
 
-    *{ box-sizing:border-box; margin:0; padding:0 }
-    html,body{ height:100% }
-
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0}
     body{
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
-      color: var(--txt);
-      background: #000; /* fallback při načítání obrázku */
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      background:#000;
     }
 
-    /* hero s pozadím z tvé fotky */
+    /* hero s fotkou na pozadí (celá noha je vidět) */
     .hero{
       min-height:100dvh;
+      position:relative;
       display:grid;
       place-items:end center;
-      padding: 0 18px calc(28px + env(safe-area-inset-bottom, 0));
-      position:relative;
-      isolation:isolate;
       overflow:hidden;
-    }
-    .hero::before{
-      content:"";
-      position:absolute; inset:0;
-      background: url("assets/IMG_2601_Original.jpeg") center/cover no-repeat fixed;
-      z-index:-2;
-      transform: translateZ(0); /* smoother on iOS */
-    }
-    /* žádné ztmavení – jen slabý jemný přechod odspodu kvůli čitelnosti textu */
-    .hero::after{
-      content:"";
-      position:absolute; inset:0;
-      background: linear-gradient(to top, rgba(255,255,255,.10), rgba(255,255,255,0) 40%);
-      z-index:-1;
-      pointer-events:none;
+      isolation:isolate;
+      background: #000 center bottom/cover no-repeat;
+      background-image: url("assets/IMG_2601_Original.jpeg");
+      /* pokud chceš vidět VÍCE fotky na malých mobilech, odkomentuj další řádek */
+      /* background-size: contain; background-color:#000; */
     }
 
-    /* pixelový králíček vlevo nahoře */
+    /* bílý pixelový králíček vlevo nahoře */
     .logo{
       position:fixed; top:14px; left:14px;
       width:70px; height:70px;
@@ -62,43 +51,64 @@
       z-index:5;
     }
 
-    /* spodní zásobník tlačítek ve STEJNÉ velikosti */
-    .link-stack{
-      width:100%;
-      max-width:640px;
+    /* stack tlačítek dole */
+    .stack{
+      position:fixed;
+      left:50%;
+      bottom: calc(24px + env(safe-area-inset-bottom,0));
+      transform:translateX(-50%);
+      width:min(720px, 92%);
       display:flex;
       flex-direction:column;
-      gap:16px;
+      gap:18px;
+      z-index:4;
     }
 
+    /* „glass-pills“ v kvalitě jako v ukázce */
     .pill{
+      appearance:none;
       display:block;
       width:100%;
       text-align:center;
       text-decoration:none;
       font-weight:800;
-      letter-spacing:.3px;
-      color: var(--txt);
-
-      /* vzhled pilulky á la RyBaby (translucent růžová s „leskem“) */
-      padding:18px 24px;
+      letter-spacing:.2px;
+      font-size: clamp(18px, 4.5vw, 22px);
+      padding:18px 26px;
       border-radius:999px;
+      color:var(--text);
+
+      /* 3 vrstvy: jemný přechod + světelné elipsy na koncích */
       background:
-        linear-gradient(180deg, var(--pill-gloss), rgba(255,255,255,0)) ,
-        linear-gradient(180deg, var(--pill-bg), rgba(255, 75, 165, .60));
+        /* highlights na koncích */
+        radial-gradient(120px 60px at 12% 50%, rgba(255,255,255,.32), rgba(255,255,255,0) 60%),
+        radial-gradient(120px 60px at 88% 50%, rgba(255,255,255,.32), rgba(255,255,255,0) 60%),
+        /* hlavní růžový přechod */
+        linear-gradient(180deg, var(--pillTop), var(--pillBot));
+      
+      border:1px solid var(--pillEdge);
       box-shadow:
         inset 0 1px 0 rgba(255,255,255,.35),
-        0 14px 32px rgba(255, 75, 165, .35);
-      backdrop-filter: blur(4px) saturate(120%);
-      -webkit-backdrop-filter: blur(4px) saturate(120%);
+        0 16px 40px rgba(255,75,165,.30);
+      backdrop-filter: blur(10px) saturate(140%);
+      -webkit-backdrop-filter: blur(10px) saturate(140%);
 
       -webkit-tap-highlight-color: transparent;
-      transition: transform .12s ease, opacity .12s ease, box-shadow .12s ease;
+      transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
     }
-    .pill:active{ transform: scale(.98); opacity:.95 }
 
-    @media (min-width: 768px){
-      .pill{ padding:20px 28px; font-size:20px }
+    .pill:active{
+      transform: scale(.985);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.28),
+        0 12px 28px rgba(255,75,165,.24);
+      opacity:.98;
+    }
+
+    /* drobná rezerva pro extrémně malé výšky */
+    @media (max-height: 620px){
+      .stack{ gap:12px }
+      .pill{ padding:14px 22px }
     }
   </style>
 
@@ -106,7 +116,7 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-WH62CVXEQ4"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag(){ dataLayer.push(arguments); }
     gtag('js', new Date());
     gtag('config', 'G-WH62CVXEQ4');
   </script>
@@ -116,8 +126,8 @@
   <!-- logo -->
   <img src="assets/IMG_5512.webp" alt="femboystar" class="logo" width="70" height="70" />
 
-  <main class="hero" role="main" aria-label="Links">
-    <nav class="link-stack" aria-label="primary links">
+  <main class="hero" role="main" aria-label="links">
+    <nav class="stack" aria-label="primary">
       <a class="pill" href="https://onlyfans.com/perisvixen" target="_blank" rel="noopener">OnlyFans</a>
       <a class="pill" href="https://x.com/perisvixen" target="_blank" rel="noopener">X</a>
       <a class="pill" href="https://www.instagram.com/perisvixen" target="_blank" rel="noopener">Instagram</a>
