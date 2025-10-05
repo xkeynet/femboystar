@@ -11,55 +11,94 @@
   <link rel="apple-touch-icon" href="assets/favicon-32.png" />
 
   <style>
-    *{ box-sizing:border-box; margin:0; padding:0; }
-    html,body{
-      height:100%;
-      background:#FF4BA5;
+    :root{
+      --brand:#FF4BA5;                 /* tvoje růžová */
+      --pill-bg: rgba(255, 75, 165, .72); /* průhlednost pilulek */
+      --pill-gloss: rgba(255,255,255,.25);
+      --txt:#000;
+    }
+
+    *{ box-sizing:border-box; margin:0; padding:0 }
+    html,body{ height:100% }
+
+    body{
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+      color: var(--txt);
+      background: #000; /* fallback při načítání obrázku */
     }
 
+    /* hero s pozadím z tvé fotky */
     .hero{
+      min-height:100dvh;
+      display:grid;
+      place-items:end center;
+      padding: 0 18px calc(28px + env(safe-area-inset-bottom, 0));
       position:relative;
-      height:100dvh;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      align-items:center;
-      gap:18px;
+      isolation:isolate;
+      overflow:hidden;
+    }
+    .hero::before{
+      content:"";
+      position:absolute; inset:0;
+      background: url("assets/IMG_2601_Original.jpeg") center/cover no-repeat fixed;
+      z-index:-2;
+      transform: translateZ(0); /* smoother on iOS */
+    }
+    /* žádné ztmavení – jen slabý jemný přechod odspodu kvůli čitelnosti textu */
+    .hero::after{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(to top, rgba(255,255,255,.10), rgba(255,255,255,0) 40%);
+      z-index:-1;
+      pointer-events:none;
     }
 
+    /* pixelový králíček vlevo nahoře */
     .logo{
       position:fixed; top:14px; left:14px;
       width:70px; height:70px;
-      image-rendering:pixelated;
-      user-select:none;
-      -webkit-user-drag:none;
+      image-rendering: pixelated;
+      user-select:none; -webkit-user-drag:none;
+      z-index:5;
     }
 
-    .pill{
-      display:inline-block;
-      padding:14px 34px;
-      border:2px solid #000;
-      border-radius:999px;
-      color:#000;
-      font-weight:600;
-      font-size:18px;
-      text-decoration:none;
-      background:transparent;
-      transition: all 0.18s ease;
-    }
-
-    .pill:hover{
-      background:#000;
-      color:#FF4BA5;
-      transform:translateY(-2px);
-    }
-
-    .dock{
+    /* spodní zásobník tlačítek ve STEJNÉ velikosti */
+    .link-stack{
+      width:100%;
+      max-width:640px;
       display:flex;
       flex-direction:column;
       gap:16px;
-      align-items:center;
+    }
+
+    .pill{
+      display:block;
+      width:100%;
+      text-align:center;
+      text-decoration:none;
+      font-weight:800;
+      letter-spacing:.3px;
+      color: var(--txt);
+
+      /* vzhled pilulky á la RyBaby (translucent růžová s „leskem“) */
+      padding:18px 24px;
+      border-radius:999px;
+      background:
+        linear-gradient(180deg, var(--pill-gloss), rgba(255,255,255,0)) ,
+        linear-gradient(180deg, var(--pill-bg), rgba(255, 75, 165, .60));
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.35),
+        0 14px 32px rgba(255, 75, 165, .35);
+      backdrop-filter: blur(4px) saturate(120%);
+      -webkit-backdrop-filter: blur(4px) saturate(120%);
+
+      -webkit-tap-highlight-color: transparent;
+      transition: transform .12s ease, opacity .12s ease, box-shadow .12s ease;
+    }
+    .pill:active{ transform: scale(.98); opacity:.95 }
+
+    @media (min-width: 768px){
+      .pill{ padding:20px 28px; font-size:20px }
     }
   </style>
 
@@ -77,8 +116,8 @@
   <!-- logo -->
   <img src="assets/IMG_5512.webp" alt="femboystar" class="logo" width="70" height="70" />
 
-  <main class="hero" role="main">
-    <nav class="dock" aria-label="social links">
+  <main class="hero" role="main" aria-label="Links">
+    <nav class="link-stack" aria-label="primary links">
       <a class="pill" href="https://onlyfans.com/perisvixen" target="_blank" rel="noopener">OnlyFans</a>
       <a class="pill" href="https://x.com/perisvixen" target="_blank" rel="noopener">X</a>
       <a class="pill" href="https://www.instagram.com/perisvixen" target="_blank" rel="noopener">Instagram</a>
