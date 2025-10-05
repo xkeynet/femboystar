@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cs">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>femboystar</title>
   <meta name="theme-color" content="#FF4BA5" />
@@ -12,70 +12,59 @@
 
   <style>
     :root{
-      --brand:#FF4BA5;
-      --pill1: rgba(255,75,165,.35);  /* jemně průhledné růžové */
-      --pill2: rgba(255,75,165,.20);
-      --stroke: rgba(255,255,255,.25);
+      --pink:#FF4BA5;
       --text:#0b0b0b;
+      --border:#000;
     }
 
     *{box-sizing:border-box;margin:0;padding:0}
     html,body{height:100%}
-
-    /* FOTO – tak aby byly vidět celé kraťasy i boty */
     body{
-      font-family: system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+      background:var(--pink);
       color:var(--text);
-      background:#000 center bottom/cover no-repeat;
-      background-image:url("assets/IMG_2601_Original.jpeg");
-      background-position:center bottom;
+      -webkit-font-smoothing:antialiased;
     }
 
-    /* králíček vlevo nahoře */
+    /* logo vlevo nahoře */
     .logo{
       position:fixed; top:14px; left:14px;
-      width:70px; height:70px; z-index:5;
+      width:70px; height:70px;
       image-rendering:pixelated;
       user-select:none; -webkit-user-drag:none;
+      z-index:10;
     }
 
-    /* tlačítka dole */
+    /* spodní sloupec tlačítek */
     .stack{
       position:fixed;
       left:50%;
       bottom:calc(28px + env(safe-area-inset-bottom,0));
       transform:translateX(-50%);
-      width:min(720px,92%);
+      width:min(640px,92%);
       display:flex; flex-direction:column; gap:16px;
     }
 
-    /* růžové jemně průhledné pilulky */
+    /* průhledné „pilulky“ s černým obrysem – všechny stejně velké */
     .pill{
       display:block;
       width:100%;
       padding:18px 28px;
+      border:2px solid var(--border);
       border-radius:999px;
-      text-align:center;
+      background:transparent;
+      color:var(--border);
       text-decoration:none;
+      text-align:center;
       font-weight:800;
       letter-spacing:.2px;
       font-size:clamp(18px,4.5vw,22px);
-      color:var(--text);
-      background:linear-gradient(180deg, var(--pill1), var(--pill2));
-      border:1px solid var(--stroke);
-      box-shadow:0 8px 20px rgba(255,75,165,.20);
       -webkit-tap-highlight-color:transparent;
-      transition:transform .12s ease, box-shadow .12s ease, opacity .12s ease;
-      backdrop-filter:blur(6px) saturate(140%);
-      -webkit-backdrop-filter:blur(6px) saturate(140%);
+      transition:transform .12s ease, opacity .12s ease;
     }
+    .pill:active{ transform:scale(.985); opacity:.95 }
 
-    .pill:active{
-      transform:scale(.985);
-      opacity:.95;
-      box-shadow:0 6px 14px rgba(255,75,165,.18);
-    }
-
+    /* drobná rezerva pro malé výšky */
     @media (max-height:640px){
       .stack{ gap:12px }
       .pill{ padding:14px 22px }
