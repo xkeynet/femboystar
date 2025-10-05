@@ -18,11 +18,14 @@
     }
 
     *{box-sizing:border-box;margin:0;padding:0}
-    html,body{height:100%}
+    html,body{height:100%;overflow:hidden}
     body{
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
-      background:var(--pink);
       color:var(--text);
+      background:#000 center/cover no-repeat;
+      background-image:url("assets/IMG_2132_Original.jpeg");
+      background-position:center bottom;
+      background-attachment:fixed;
       -webkit-font-smoothing:antialiased;
     }
 
@@ -43,16 +46,17 @@
       transform:translateX(-50%);
       width:min(640px,92%);
       display:flex; flex-direction:column; gap:16px;
+      z-index:5;
     }
 
-    /* průhledné „pilulky“ s černým obrysem – všechny stejně velké */
+    /* průhledné pilulky s černým obrysem */
     .pill{
       display:block;
       width:100%;
       padding:18px 28px;
       border:2px solid var(--border);
       border-radius:999px;
-      background:transparent;
+      background:rgba(255,255,255,0.06);
       color:var(--border);
       text-decoration:none;
       text-align:center;
@@ -60,11 +64,18 @@
       letter-spacing:.2px;
       font-size:clamp(18px,4.5vw,22px);
       -webkit-tap-highlight-color:transparent;
-      transition:transform .12s ease, opacity .12s ease;
+      transition:transform .12s ease, opacity .12s ease, background .12s ease;
     }
-    .pill:active{ transform:scale(.985); opacity:.95 }
 
-    /* drobná rezerva pro malé výšky */
+    .pill:hover{
+      background:rgba(0,0,0,0.1);
+    }
+
+    .pill:active{
+      transform:scale(.985);
+      opacity:.95;
+    }
+
     @media (max-height:640px){
       .stack{ gap:12px }
       .pill{ padding:14px 22px }
