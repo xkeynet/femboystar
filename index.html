@@ -13,100 +13,70 @@
   <style>
     :root{
       --brand:#FF4BA5;
-      --pillTop:  rgba(255,75,165,.62);
-      --pillBot:  rgba(255,75,165,.44);
-      --pillEdge: rgba(255,255,255,.22);
-      --text: #0c0c0c;
+      --pill1: rgba(255,75,165,.50);  /* vrch */
+      --pill2: rgba(255,75,165,.34);  /* spodek */
+      --stroke: rgba(255,255,255,.28);
+      --text:#0b0b0b;
     }
 
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0}
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+
+    /* FOTO – ať jsou vidět kraťasy */
     body{
       font-family: system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
-      color: var(--text);
-      -webkit-font-smoothing: antialiased;
-      background:#000;
+      color:var(--text);
+      background:#000 center bottom/cover no-repeat;
+      background-image:url("assets/IMG_2601_Original.jpeg");
+      /* posun na mobilech, aby byly kraťasy víc v záběru */
+      background-position: 65% bottom;
+    }
+    @media (min-width:600px){
+      body{ background-position: center bottom; }
     }
 
-    /* hero s fotkou na pozadí (celá noha je vidět) */
-    .hero{
-      min-height:100dvh;
-      position:relative;
-      display:grid;
-      place-items:end center;
-      overflow:hidden;
-      isolation:isolate;
-      background: #000 center bottom/cover no-repeat;
-      background-image: url("assets/IMG_2601_Original.jpeg");
-      /* pokud chceš vidět VÍCE fotky na malých mobilech, odkomentuj další řádek */
-      /* background-size: contain; background-color:#000; */
-    }
-
-    /* bílý pixelový králíček vlevo nahoře */
+    /* králíček vlevo nahoře */
     .logo{
       position:fixed; top:14px; left:14px;
-      width:70px; height:70px;
-      image-rendering: pixelated;
+      width:70px; height:70px; z-index:5;
+      image-rendering:pixelated;
       user-select:none; -webkit-user-drag:none;
-      z-index:5;
     }
 
-    /* stack tlačítek dole */
+    /* sloupec tlačítek u spodního okraje */
     .stack{
       position:fixed;
       left:50%;
-      bottom: calc(24px + env(safe-area-inset-bottom,0));
+      bottom:calc(28px + env(safe-area-inset-bottom,0));
       transform:translateX(-50%);
-      width:min(720px, 92%);
-      display:flex;
-      flex-direction:column;
-      gap:18px;
-      z-index:4;
+      width:min(720px,92%);
+      display:flex; flex-direction:column; gap:16px;
     }
 
-    /* „glass-pills“ v kvalitě jako v ukázce */
+    /* ČISTÉ pilulky – bez blur, bez odlesků */
     .pill{
-      appearance:none;
-      display:block;
-      width:100%;
-      text-align:center;
-      text-decoration:none;
-      font-weight:800;
-      letter-spacing:.2px;
-      font-size: clamp(18px, 4.5vw, 22px);
-      padding:18px 26px;
+      display:block; width:100%;
+      padding:18px 28px;
       border-radius:999px;
+      text-align:center; text-decoration:none;
+      font-weight:800; letter-spacing:.2px;
+      font-size:clamp(18px,4.5vw,22px);
       color:var(--text);
 
-      /* 3 vrstvy: jemný přechod + světelné elipsy na koncích */
-      background:
-        /* highlights na koncích */
-        radial-gradient(120px 60px at 12% 50%, rgba(255,255,255,.32), rgba(255,255,255,0) 60%),
-        radial-gradient(120px 60px at 88% 50%, rgba(255,255,255,.32), rgba(255,255,255,0) 60%),
-        /* hlavní růžový přechod */
-        linear-gradient(180deg, var(--pillTop), var(--pillBot));
-      
-      border:1px solid var(--pillEdge);
-      box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.35),
-        0 16px 40px rgba(255,75,165,.30);
-      backdrop-filter: blur(10px) saturate(140%);
-      -webkit-backdrop-filter: blur(10px) saturate(140%);
-
-      -webkit-tap-highlight-color: transparent;
-      transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+      background:linear-gradient(180deg, var(--pill1), var(--pill2));
+      border:1px solid var(--stroke);
+      box-shadow:0 10px 26px rgba(255,75,165,.22);
+      -webkit-tap-highlight-color:transparent;
+      transition:transform .12s ease, box-shadow .12s ease, opacity .12s ease;
     }
-
     .pill:active{
-      transform: scale(.985);
-      box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.28),
-        0 12px 28px rgba(255,75,165,.24);
+      transform:scale(.985);
+      box-shadow:0 8px 18px rgba(255,75,165,.18);
       opacity:.98;
     }
 
-    /* drobná rezerva pro extrémně malé výšky */
-    @media (max-height: 620px){
+    /* když je výška malá, ať se vše vejde a nic nepřekryje špičky bot */
+    @media (max-height:640px){
       .stack{ gap:12px }
       .pill{ padding:14px 22px }
     }
@@ -116,22 +86,20 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-WH62CVXEQ4"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){ dataLayer.push(arguments); }
+    function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-WH62CVXEQ4');
   </script>
 </head>
-
 <body>
   <!-- logo -->
   <img src="assets/IMG_5512.webp" alt="femboystar" class="logo" width="70" height="70" />
 
-  <main class="hero" role="main" aria-label="links">
-    <nav class="stack" aria-label="primary">
-      <a class="pill" href="https://onlyfans.com/perisvixen" target="_blank" rel="noopener">OnlyFans</a>
-      <a class="pill" href="https://x.com/perisvixen" target="_blank" rel="noopener">X</a>
-      <a class="pill" href="https://www.instagram.com/perisvixen" target="_blank" rel="noopener">Instagram</a>
-    </nav>
-  </main>
+  <!-- tlačítka dole -->
+  <nav class="stack" aria-label="primary">
+    <a class="pill" href="https://onlyfans.com/perisvixen" target="_blank" rel="noopener">OnlyFans</a>
+    <a class="pill" href="https://x.com/perisvixen" target="_blank" rel="noopener">X</a>
+    <a class="pill" href="https://www.instagram.com/perisvixen" target="_blank" rel="noopener">Instagram</a>
+  </nav>
 </body>
 </html>
