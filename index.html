@@ -10,24 +10,14 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
   <link rel="apple-touch-icon" href="assets/favicon-32.png" />
 
-  <!-- STYLES -->
   <style>
-    :root{
-      --pink: #FF4BA5;
-      --glassBg1: rgba(255,255,255,.30);
-      --glassBg2: rgba(255,255,255,.12);
-      --shadow:  rgba(255,75,165,.28);
-    }
-
     *{ box-sizing:border-box }
     html,body{ height:100%; margin:0 }
     body{
-      background: var(--pink) center/cover no-repeat fixed;
-      color:#fff;
+      background:#FF4BA5; /* čisté růžové pozadí */
+      color:#111;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
-      text-align:center;
     }
-
     .hero{
       position:relative;
       min-height:100dvh;
@@ -35,89 +25,19 @@
       place-items:center;
       overflow:hidden;
       isolation:isolate;
-      padding: 0 16px;
+      padding:0 16px;
     }
-
-    .hero::before{
-      content:"";
-      position:absolute; inset:0;
-      background: url("assets/IMG_5473.jpeg") center/cover no-repeat;
-      z-index:-2;
-    }
-
-    /* držíme vrstvu pro pořadí, žádné ztmavení */
-    .hero::after{
-      content:"";
-      position:absolute; inset:0;
-      background:none;
-      z-index:-1;
-      pointer-events:none;
-    }
+    /* žádné pozadí z obrázku, žádné overlaye */
 
     /* pixelový králíček vlevo nahoře */
     .logo{
       position:fixed; top:14px; left:14px;
       width:70px; height:70px;
       display:block;
-      user-select:none; -webkit-user-drag:none;
+      user-select:none;
+      -webkit-user-drag:none;
       image-rendering: pixelated;
       z-index:50;
-    }
-
-    /* jméno nad ikonami (středově níž) */
-    .name{
-      position: absolute;
-      bottom: 120px; /* sedí nad dóckem s ikonami */
-      left: 50%;
-      transform: translateX(-50%);
-      margin: 0;
-      font-weight: 700;
-      font-size: clamp(36px, 7.5vw, 64px);
-      letter-spacing: .5px;
-      color: rgba(255,255,255,.92);
-      text-shadow: 0 2px 10px rgba(0,0,0,.22);
-      pointer-events: none;
-    }
-
-    /* spodní dock – kulaté „bubliny“ pro ikony */
-    .dock{
-      position: fixed;
-      left: 50%;
-      bottom: calc(20px + env(safe-area-inset-bottom, 0));
-      transform: translateX(-50%);
-      display: flex;
-      gap: 16px;
-      z-index: 40;
-    }
-
-    .icon-btn{
-      width:72px; height:72px; border-radius:50%;
-      overflow:hidden; /* vytvoří skutečný kruh i pro hranaté obrázky */
-      display:inline-flex; align-items:center; justify-content:center;
-      background:
-        linear-gradient(180deg, var(--glassBg1), var(--glassBg2));
-      backdrop-filter: blur(8px) saturate(140%);
-      -webkit-backdrop-filter: blur(8px) saturate(140%);
-      box-shadow: 0 10px 22px var(--shadow);
-      -webkit-tap-highlight-color: transparent;
-      transition: transform .12s ease, opacity .12s ease, box-shadow .12s ease;
-    }
-    .icon-btn:active{
-      transform: scale(.97);
-      opacity: .96;
-      box-shadow: 0 8px 18px rgba(255,75,165,.24);
-    }
-
-    .icon-btn img{
-      width:60px; height:60px;
-      object-fit: contain; /* stejné měřítko pro PNG/JPEG */
-      display:block;
-    }
-
-    @media (max-width: 380px){
-      .icon-btn{ width:64px; height:64px }
-      .icon-btn img{ width:52px; height:52px }
-      .name{ bottom: 110px }
     }
   </style>
 
@@ -132,25 +52,9 @@
 </head>
 
 <body>
-  <!-- králíček -->
+  <!-- logo -->
   <img src="assets/IMG_5512.webp" alt="femboystar" class="logo" width="70" height="70" />
 
-  <main class="hero" role="main" aria-label="Peris Vixen">
-    <!-- jméno -->
-    <h1 class="name">Peris Vixen</h1>
-
-    <!-- spodní kulaté ikonky -->
-    <nav class="dock" aria-label="social links">
-      <a class="icon-btn" href="https://onlyfans.com/perisvixen" aria-label="OnlyFans" rel="noopener">
-        <img src="assets/IMG_5599.png" alt="OnlyFans">
-      </a>
-      <a class="icon-btn" href="https://www.instagram.com/perisvixen" aria-label="Instagram" rel="noopener">
-        <img src="assets/IMG_5602.png" alt="Instagram">
-      </a>
-      <a class="icon-btn" href="https://x.com/perisvixen" aria-label="X" rel="noopener">
-        <img src="assets/IMG_5601.jpeg" alt="X">
-      </a>
-    </nav>
-  </main>
+  <main class="hero" role="main"></main>
 </body>
 </html>
