@@ -13,26 +13,22 @@
   <style>
     :root{
       --brand:#FF4BA5;
-      --pill1: rgba(255,75,165,.50);  /* vrch */
-      --pill2: rgba(255,75,165,.34);  /* spodek */
-      --stroke: rgba(255,255,255,.28);
+      --pill1: rgba(255,75,165,.35);  /* jemně průhledné růžové */
+      --pill2: rgba(255,75,165,.20);
+      --stroke: rgba(255,255,255,.25);
       --text:#0b0b0b;
     }
 
     *{box-sizing:border-box;margin:0;padding:0}
     html,body{height:100%}
 
-    /* FOTO – ať jsou vidět kraťasy */
+    /* FOTO – tak aby byly vidět celé kraťasy i boty */
     body{
       font-family: system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
       color:var(--text);
       background:#000 center bottom/cover no-repeat;
       background-image:url("assets/IMG_2601_Original.jpeg");
-      /* posun na mobilech, aby byly kraťasy víc v záběru */
-      background-position: 65% bottom;
-    }
-    @media (min-width:600px){
-      body{ background-position: center bottom; }
+      background-position:center bottom;
     }
 
     /* králíček vlevo nahoře */
@@ -43,7 +39,7 @@
       user-select:none; -webkit-user-drag:none;
     }
 
-    /* sloupec tlačítek u spodního okraje */
+    /* tlačítka dole */
     .stack{
       position:fixed;
       left:50%;
@@ -53,29 +49,33 @@
       display:flex; flex-direction:column; gap:16px;
     }
 
-    /* ČISTÉ pilulky – bez blur, bez odlesků */
+    /* růžové jemně průhledné pilulky */
     .pill{
-      display:block; width:100%;
+      display:block;
+      width:100%;
       padding:18px 28px;
       border-radius:999px;
-      text-align:center; text-decoration:none;
-      font-weight:800; letter-spacing:.2px;
+      text-align:center;
+      text-decoration:none;
+      font-weight:800;
+      letter-spacing:.2px;
       font-size:clamp(18px,4.5vw,22px);
       color:var(--text);
-
       background:linear-gradient(180deg, var(--pill1), var(--pill2));
       border:1px solid var(--stroke);
-      box-shadow:0 10px 26px rgba(255,75,165,.22);
+      box-shadow:0 8px 20px rgba(255,75,165,.20);
       -webkit-tap-highlight-color:transparent;
       transition:transform .12s ease, box-shadow .12s ease, opacity .12s ease;
-    }
-    .pill:active{
-      transform:scale(.985);
-      box-shadow:0 8px 18px rgba(255,75,165,.18);
-      opacity:.98;
+      backdrop-filter:blur(6px) saturate(140%);
+      -webkit-backdrop-filter:blur(6px) saturate(140%);
     }
 
-    /* když je výška malá, ať se vše vejde a nic nepřekryje špičky bot */
+    .pill:active{
+      transform:scale(.985);
+      opacity:.95;
+      box-shadow:0 6px 14px rgba(255,75,165,.18);
+    }
+
     @media (max-height:640px){
       .stack{ gap:12px }
       .pill{ padding:14px 22px }
@@ -91,6 +91,7 @@
     gtag('config', 'G-WH62CVXEQ4');
   </script>
 </head>
+
 <body>
   <!-- logo -->
   <img src="assets/IMG_5512.webp" alt="femboystar" class="logo" width="70" height="70" />
