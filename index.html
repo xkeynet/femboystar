@@ -11,39 +11,47 @@
   <link rel="apple-touch-icon" href="assets/favicon-32.png" />
 
   <style>
-    *{ box-sizing:border-box; margin:0; padding:0; }
-    html,body{ height:100%; background:#FF4BA5; font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif; }
-
-    .hero{
-      position:relative;
-      height:100dvh;
-      display:flex;
-      justify-content:center;
-      align-items:flex-end;
-      padding-bottom:40px;
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      height: 100%;
+      background: #FF4BA5;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
     }
 
-    .logo{
-      position:fixed; top:14px; left:14px;
-      width:70px; height:70px;
-      image-rendering:pixelated;
-      user-select:none; -webkit-user-drag:none;
+    .hero {
+      position: relative;
+      height: 100dvh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      padding-bottom: 40px;
     }
 
-    .dock{
-      display:flex;
-      gap:28px;
-      align-items:center;
+    .logo {
+      position: fixed;
+      top: 14px;
+      left: 14px;
+      width: 70px;
+      height: 70px;
+      image-rendering: pixelated;
+      user-select: none;
+      -webkit-user-drag: none;
     }
 
-    .dock img{
-      width:50px;
-      height:auto;
-      display:block;
+    .dock {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .dock img {
+      height: 50px;     /* sjednocená výška všech ikon */
+      width: auto;
+      display: block;
       transition: transform 0.15s ease;
     }
 
-    .dock a:hover img{
+    .dock a:hover img {
       transform: scale(1.08);
     }
   </style>
@@ -52,7 +60,7 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-WH62CVXEQ4"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag(){ dataLayer.push(arguments); }
     gtag('js', new Date());
     gtag('config', 'G-WH62CVXEQ4');
   </script>
